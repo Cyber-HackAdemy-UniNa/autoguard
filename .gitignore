@@ -1,25 +1,13 @@
-google-services.json
-keystore/
-truststore/
-.keystore/
-.truststore/
-CertificationAuthority/
-chronicle_creds.json
+**/google-services.json
+**/keystore/
+**/truststore/
+**/.keystore/
+**/.truststore/
+**/CertificationAuthority/
+**/chronicle_creds.json
+**/__pycache__/
+**/.env
 
-### Python ###
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux

@@ -3,16 +3,20 @@ from googleapiclient import _auth
 import json
 from datetime import timedelta,datetime,timezone
 import platform
+from dotenv import load_dotenv
+import os
+
+load_dotenv(dotenv_path='siem/.env')
 
 
-# SCOPES = ['https://www.googleapis.com/auth/malachite-ingestion']
-# INGESTION_API = "https://europe-malachiteingestion-pa.googleapis.com/v2/udmevents:batchCreate"
+SCOPES = os.getenv('SCOPES').split(',')
+INGESTION_API = os.getenv('INGESTION_API') 
+SERVICE_ACCOUNT_FILE = os.getenv('SERVICE_ACCOUNT_FILE')
+CUSTOMER_ID = os.getenv('CUSTOMER_ID')
 
-# SERVICE_ACCOUNT_FILE = 'siem/chronicle_creds.json'
+credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-# credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-
-# http_client = _auth.authorized_http(credentials)
+http_client = _auth.authorized_http(credentials)
 
 
 def generate_timestamp():
@@ -30,7 +34,7 @@ def generate_timestamp():
 def ingest_logs(http_info,enrichment_fields):
         
         body = json.dumps({
-            "customer_id": "81180cff-3e4c-4a92-a479-7798bdabfc67",
+            "customer_id": CUSTOMER_ID,
             "events": [{
                 "metadata": {
                     "eventTimestamp": f"{generate_timestamp()}",
@@ -61,10 +65,10 @@ def ingest_logs(http_info,enrichment_fields):
         })
         
         
-        # response = http_client.request(INGESTION_API, 
-        #                method="POST", 
-        #                body=body)
-        # print(response[0].get('status'))
+        response = http_client.request(INGESTION_API, 
+                       method="POST", 
+                       body=body)
+        print(response[0].get('status'))
         
 
 

@@ -4,14 +4,15 @@ import json
 from datetime import timedelta,datetime,timezone
 import platform
 import requests
+from dotenv import load_dotenv
+import os
 
+load_dotenv(dotenv_path='.env')
 
-SCOPES = ['https://www.googleapis.com/auth/malachite-ingestion']
-INGESTION_API = "https://europe-malachiteingestion-pa.googleapis.com/v2/udmevents:batchCreate"
-
-customer_id="81180cff-3e4c-4a92-a479-7798bdabfc67"
-# Replace with the full path to your service account file
-SERVICE_ACCOUNT_FILE = 'chronicle_creds.json'
+SCOPES = os.getenv('SCOPES').split(',')
+INGESTION_API = os.getenv('INGESTION_API') 
+SERVICE_ACCOUNT_FILE = os.getenv('SERVICE_ACCOUNT_FILE')
+CUSTOMER_ID = os.getenv('CUSTOMER_ID')
 
 # Create a credential using Google Developer Service Account Credential and Chronicle API
 # Scope.
@@ -21,7 +22,6 @@ credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCO
 http_client = _auth.authorized_http(credentials)
 
 vehicle_ip = requests.get('https://ident.me').text
-
 
 def generate_timestamp():
     current_utc_time = datetime.utcnow()
@@ -37,7 +37,7 @@ def generate_timestamp():
 def ingest_logs(enrichment_fields):
     
     body = json.dumps({
-    "customer_id": "81180cff-3e4c-4a92-a479-7798bdabfc67",
+    "customer_id": CUSTOMER_ID,
     "events": [{
         "metadata": {
             "eventTimestamp": f"{generate_timestamp()}",
@@ -74,7 +74,7 @@ def ingest_logs(enrichment_fields):
 def send_location_logs(enrichment_fields):
     
     body = json.dumps({
-    "customer_id": "81180cff-3e4c-4a92-a479-7798bdabfc67",
+    "customer_id": CUSTOMER_ID,
     "events": [{
         "metadata": {
             "eventTimestamp": f"{generate_timestamp()}",
@@ -121,12 +121,12 @@ def ingest_location_log_if_mismatch(issuer_ip,vin):
     if(mycountry!=issuer_country):
 
         enrichment_fields={
-        "eventType": "SCAN_HOST",
-        "issuer_ip": f"{issuer_ip}",
-        "issuer_location": "issuer_country",
-        "vehicle_location": "mycountry",
-        "vin": f"{vin}",
-        "categories": ["DATA_AT_REST"],
+        "eventType": "USER_RESOURCE_ACCESS",
+        "issuer_ip": issuer_ip,
+        "issuer_location": issuer_country,
+        "vehicle_location": mycountry,
+        "vin": vin,
+        "categories": ["ACL_VIOLATION"],
         "description": 'LOCATION_MISMATCH: An user issued a remote control command from a different location than the actual vehicle.',
         "severity": "HIGH",
         "alert_state": "ALERTING",
