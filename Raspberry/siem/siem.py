@@ -21,8 +21,6 @@ credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCO
 # Build an HTTP client to make authorized OAuth requests.
 http_client = _auth.authorized_http(credentials)
 
-vehicle_ip = requests.get('https://ident.me').text
-
 def generate_timestamp():
     current_utc_time = datetime.utcnow()
 
@@ -47,7 +45,7 @@ def ingest_logs(enrichment_fields):
             "fields" : {
             "Entity": "VEHICLE",
             "vin": enrichment_fields.get("vin"),
-            "vehicle_ip": vehicle_ip,
+            "vehicle_ip": requests.get('https://ident.me').text,
             }},
         "target": {
             "hostname": f"{platform.node()}"
@@ -71,7 +69,7 @@ def ingest_logs(enrichment_fields):
 
 
 
-def send_location_logs(enrichment_fields):
+def ingest_location_logs(enrichment_fields):
     
     body = json.dumps({
     "customer_id": CUSTOMER_ID,
@@ -86,7 +84,7 @@ def send_location_logs(enrichment_fields):
             "vin": enrichment_fields.get("vin"),
             "issuer_ip": enrichment_fields.get("issuer_ip"),
             "issuer_location": enrichment_fields.get("issuer_location"),
-            "vehicle_ip": vehicle_ip,
+            "vehicle_ip": enrichment_fields.get("vehicle_ip"),
             "vehicle_location": enrichment_fields.get("vehicle_location")
             }
         },
@@ -110,37 +108,9 @@ def send_location_logs(enrichment_fields):
     print(response[0].get('status'))
 
 
-def ingest_location_log_if_mismatch(issuer_ip,vin):
-    myip_address = get_ip()
-    response = requests.get(f'http://ip-api.com/json/{myip_address}').json()
-    mycountry = response.get("country")
-
-    response = requests.get(f'http://ip-api.com/json/{issuer_ip}').json()
-    issuer_country = response.get("country")
-
-    if(mycountry!=issuer_country):
-
-        enrichment_fields={
-        "eventType": "USER_RESOURCE_ACCESS",
-        "issuer_ip": issuer_ip,
-        "issuer_location": issuer_country,
-        "vehicle_location": mycountry,
-        "vin": vin,
-        "categories": ["ACL_VIOLATION"],
-        "description": 'LOCATION_MISMATCH: An user issued a remote control command from a different location than the actual vehicle.',
-        "severity": "HIGH",
-        "alert_state": "ALERTING",
-        "action":  "BLOCK"
-        }
-
-        send_location_logs(enrichment_fields)
-
-    return mycountry==issuer_country
 
 
-def get_ip():
-    response = requests.get('https://api64.ipify.org?format=json').json()
-    return response["ip"]
+
 
 
 

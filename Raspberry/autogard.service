@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=autoguard
 WorkingDirectory=/home/autoguard/autoguard/Raspberry/
-ExecStart=/bin/bash -c 'cd /home/autoguard/autoguard/Raspberry/ && source venv/bin/activate && python subscribe.py'
+ExecStart=/bin/bash -c 'cd /home/autoguard/autoguard/Raspberry/ && source venv/bin/activate && python3 start.py'
 Restart=always
 RestartSec=5
 

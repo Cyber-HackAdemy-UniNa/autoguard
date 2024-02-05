@@ -1,6 +1,22 @@
-from siem import ingest_logs,send_location_logs
-from subscribe import vin
+from siem.siem import ingest_logs, ingest_location_logs
+from Raspberry.start import vin
 
+
+def ingest_location_mismatch(issuer_ip, issuer_location, vehicle_location, vehicle_ip):
+    ingest_location_logs(enrichment_fields={
+        "eventType": "USER_RESOURCE_ACCESS",
+        "issuer_ip": issuer_ip,
+        "issuer_location": issuer_location,
+        "vehicle_location": vehicle_location,
+        "vehicle_ip": vehicle_ip,
+        "vin": vin,
+        "categories": ["ACL_VIOLATION"],
+        "description": 'LOCATION_MISMATCH: An user issued a remote control command from a different location than the actual vehicle.',
+        "severity": "HIGH",
+        "alert_state": "ALERTING",
+        "action":  "BLOCK"
+        })    
+    
 def ingest_broker_connection_successful(vin, broker, port):
     ingest_logs(enrichment_fields={
         "eventType": "USER_RESOURCE_ACCESS",
