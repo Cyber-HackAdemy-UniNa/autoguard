@@ -23,7 +23,6 @@ class Vehicle:
     def to_dict(self):
         return {
             'vin': self._vin,
-            'id': self._id,
             'plateNumber': self._plate_number,
             'model': self._model,
             'imageLink': self._image_link,
