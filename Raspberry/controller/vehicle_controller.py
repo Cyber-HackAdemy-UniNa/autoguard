@@ -16,16 +16,14 @@ import time
 #Button, GPIO 26, PIN 37
 #Button, Ground PIN 39
 
-LED_PIN_1 = 17
+HEADLIGHTS_PIN = 17
 ASSOCIATION_PIN = 26
+LEFT_DOOR_PIN = 14
+RIGHT_DOOR_PIN = 18
 
-GPIO_DOOR = {'left': 14, 'right': 18}
+GPIO_DOOR = {'left': LEFT_DOOR_PIN, 'right': RIGHT_DOOR_PIN}
 ANGLES = {'max': 1, 'min': -1}
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN_1, GPIO.OUT)
-GPIO.setup(ASSOCIATION_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def control_door(side: str, opened: bool) -> bool:
     servo = None
@@ -46,9 +44,9 @@ def control_door(side: str, opened: bool) -> bool:
 def control_headlights(opened: bool) -> bool:
     try:
         if opened == 'true':
-            GPIO.output(LED_PIN_1, GPIO.HIGH)
+            GPIO.output(HEADLIGHTS_PIN, GPIO.HIGH)
         else:
-            GPIO.output(LED_PIN_1, GPIO.LOW)
+            GPIO.output(HEADLIGHTS_PIN, GPIO.LOW)
         return True
     except Exception:
         return False
