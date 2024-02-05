@@ -7,6 +7,7 @@
 **/chronicle_creds.json
 **/__pycache__/
 **/.env
+**/.token.env
 
 
 
