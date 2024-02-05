@@ -1,15 +1,11 @@
-
-**/__pycache__/
-**/venv/
-**/*.pyc
-**/.env
-**/google-services.json
-**/keystore/
-**/truststore/
-**/.keystore/
-**/.truststore/
+.env
+google-services.json
+keystore/
+truststore/
+.keystore/
+.truststore/
 CertificationAuthority/
-**/chronicle_creds.json
+chronicle_creds.json
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
