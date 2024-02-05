@@ -1,47 +1,48 @@
 # Autoguard
+AutoGuard is a vehicle monitoring and security system, developed as the final project work for CyberHackademy Unina 2023. It is designed to provide an integrated solution for vehicle management and safety.
 
-AutoGuard è un sistema innovativo di monitoraggio e sicurezza veicolare, progettato per offrire una soluzione integrata per la gestione e la sicurezza dei veicoli attraverso la tecnologia MQTT.
-Combinando un'applicazione mobile user-friendly, un server MQTT robusto e script Python efficienti, AutoGuard fornisce un'interfaccia semplice per monitorare lo stato del veicolo, ricevere notifiche in tempo reale e gestire dati critici relativi alla sicurezza. Grazie all'uso di Docker, il sistema è facilmente distribuibile e scalabile, assicurando una soluzione flessibile adatta sia ad uso personale che professionale.
+## Table of Contents
+- [Solution proposed](#solution-proposed)
+- [Architecture](#architecture)
+  - [Mobile App](#mobile-app)
+  - [Vehicle Model](#vehicle-model)
+  - [Backend](#backend)
+  - [Siem](#siem)
+- [Installation](#installation)
+- [Authors](#authors)
 
-## Indice
+## Solution proposed
 
-- [Introduzione](#introduzione)
-- [Tecnologie Utilizzate](#tecnologie-utilizzate)
-- [Installazione](#installazione)
-- [Autori](#autori)
+Our system primarily provides users with a mobile application and a web interface, allowing them to view their vehicles, associate new ones, and manage them remotely in an intuitive and fast manner. Through the use of the SIEM Chronicle, we ensure proactive security monitoring, enhancing the ability to detect and mitigate potential threats before they can cause significant damage.
 
-## Introduzione
+## Architecture 
 
-Nell'era digitale, la sicurezza e il monitoraggio dei veicoli sono diventati imprescindibili. AutoGuard nasce dall'esigenza di fornire una soluzione completa che integri la comodità di un'app mobile con la potenza e l'affidabilità di un sistema basato su server MQTT. Attraverso l'uso di script Python dedicati e l'architettura dockerizzata, AutoGuard mira a semplificare la gestione della sicurezza dei veicoli, rendendo le informazioni accessibili e gestibili da remoto in qualsiasi momento. Il progetto è stato concepito per essere estremamente modulare, permettendo agli utenti di personalizzare le funzionalità secondo le proprie specifiche necessità. Che si tratti di monitorare la posizione di un veicolo, ricevere allarmi di movimento non autorizzato o analizzare dati storici, AutoGuard fornisce gli strumenti necessari per una gestione completa e innovativa della sicurezza veicolare.
+![PW1-Presentation](https://github.com/Cyber-HackAdemy-UniNa/autoguard/assets/75443422/665bad8b-c44a-493c-9e1b-c983826f9b7e)
 
-## Tecnologie Utilizzate
+### Mobile App
+Coming soon..
 
-Elenca le tecnologie, i linguaggi, i framework e le librerie utilizzate nel progetto. Ad esempio:
+### Vehicle Model
+Coming soon..
 
-- Python 3.8
-- Flask
-- MQTT
-- Docker
-- Raspberry Pi
 
-## Installazione
+### Backend
+Coming soon..
 
-Fornisci una guida passo passo su come configurare l'ambiente di sviluppo e installare tutte le dipendenze necessarie per eseguire il progetto. Ad esempio:
+### Siem
+Coming soon..
 
-```bash
-git clone https://github.com/Cyber-HackAdemy-UniNa/pw2023_gruppo1.git
-cd pw2023_gruppo1
-docker compose up -d
-```
+## Installation
 
-## Autori
+Coming soon..
 
-- Emanuele Pescara
+## Authors
+
 - Fabio Cinicolo
-- Giuseppe Oliviero
-- Michele Milano
 - Umberto Micillo
+- Michele Milano
+- Emanuele Pescara
+- Giuseppe Oliviero
 
----
 
 © 2024, Cyber HackAdemy.
