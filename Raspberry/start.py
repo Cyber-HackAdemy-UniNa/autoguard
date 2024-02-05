@@ -2,7 +2,7 @@ from paho.mqtt import client as mqtt_client
 from dotenv import load_dotenv
 from paho.mqtt import publish
 from util.crypto import check_token, print_token
-from Raspberry.controller.vehicle_controller import is_button_pressed_within_timeout, control_door, control_headlights
+from controller.vehicle_controller import is_button_pressed_within_timeout, control_door, control_headlights
 from util.location import check_location_mismatch
 import siem.siem_ingestor as siem_ingestor
 import os
@@ -64,10 +64,7 @@ def subscribe_doors(client: mqtt_client, topic: str):
         
         location_mismatch = check_location_mismatch(json_msg['issuer_ip'])
         if location_mismatch['result'] is True:
-            siem_ingestor.ingest_location_mismatch(location_mismatch['issuer_ip'],
-                                                   location_mismatch['issuer_location'],
-                                                   location_mismatch['vehicle_location'],
-                                                   location_mismatch['vehicle_ip'])
+            siem_ingestor.ingest_location_mismatch(vin, location_mismatch)
             return
         
         if control_door(json_msg['side'], opened) is True:
@@ -88,10 +85,7 @@ def subscribe_headlights(client: mqtt_client,topic:str):
         location_mismatch = check_location_mismatch(json_msg['issuer_ip'])
 
         if location_mismatch['result'] is True:
-            siem_ingestor.ingest_location_mismatch(location_mismatch['issuer_ip'],
-                                                   location_mismatch['issuer_location'],
-                                                   location_mismatch['vehicle_location'],
-                                                   location_mismatch['vehicle_ip'])
+            siem_ingestor.ingest_location_mismatch(vin, location_mismatch)
             return
         
         if control_headlights(opened) is True:
@@ -112,10 +106,7 @@ def subscribe_pair(client: mqtt_client, topic: str):
         location_mismatch = check_location_mismatch(json_msg['issuer_ip'])
 
         if location_mismatch['result'] is True:
-            siem_ingestor.ingest_location_mismatch(location_mismatch['issuer_ip'],
-                                                   location_mismatch['issuer_location'],
-                                                   location_mismatch['vehicle_location'],
-                                                   location_mismatch['vehicle_ip'])
+            siem_ingestor.ingest_location_mismatch(vin, location_mismatch)
             return
         
         token=json_msg.get('token')

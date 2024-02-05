@@ -7,7 +7,7 @@ import requests
 from dotenv import load_dotenv
 import os
 
-load_dotenv(dotenv_path='.env')
+load_dotenv(dotenv_path='siem/.env')
 
 SCOPES = os.getenv('SCOPES').split(',')
 INGESTION_API = os.getenv('INGESTION_API') 
@@ -85,7 +85,9 @@ def ingest_location_logs(enrichment_fields):
             "issuer_ip": enrichment_fields.get("issuer_ip"),
             "issuer_location": enrichment_fields.get("issuer_location"),
             "vehicle_ip": enrichment_fields.get("vehicle_ip"),
-            "vehicle_location": enrichment_fields.get("vehicle_location")
+            "vehicle_location": enrichment_fields.get("vehicle_location"),
+            "issuer_latitude": enrichment_fields.get("issuer_latitude"),
+            "issuer_longitude": enrichment_fields.get("issuer_longitude")            
             }
         },
         "target": {

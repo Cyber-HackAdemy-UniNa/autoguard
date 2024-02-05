@@ -1,14 +1,14 @@
 from siem.siem import ingest_logs, ingest_location_logs
-from Raspberry.start import vin
 
-
-def ingest_location_mismatch(issuer_ip, issuer_location, vehicle_location, vehicle_ip):
+def ingest_location_mismatch(vin, location_mismatch):
     ingest_location_logs(enrichment_fields={
         "eventType": "USER_RESOURCE_ACCESS",
-        "issuer_ip": issuer_ip,
-        "issuer_location": issuer_location,
-        "vehicle_location": vehicle_location,
-        "vehicle_ip": vehicle_ip,
+        "issuer_ip": location_mismatch['issuer_ip'],
+        "issuer_location": location_mismatch['issuer_location'],
+        "vehicle_location": location_mismatch['vehicle_location'],
+        "vehicle_ip": location_mismatch['vehicle_ip'],
+        "issuer_latitude": location_mismatch['issuer_latitude'],
+        "issuer_longitude": location_mismatch['issuer_longitude'],
         "vin": vin,
         "categories": ["ACL_VIOLATION"],
         "description": 'LOCATION_MISMATCH: An user issued a remote control command from a different location than the actual vehicle.',
@@ -20,7 +20,7 @@ def ingest_location_mismatch(issuer_ip, issuer_location, vehicle_location, vehic
 def ingest_broker_connection_successful(vin, broker, port):
     ingest_logs(enrichment_fields={
         "eventType": "USER_RESOURCE_ACCESS",
-        "vin": f"{vin}",
+        "vin": vin,
         "categories": ["UNKNOWN_CATEGORY"],
         "description": f"Vehicle connected to MQTT EMQX Broker mqtts://{broker}:{port}",
         "severity": "LOW",
@@ -28,19 +28,6 @@ def ingest_broker_connection_successful(vin, broker, port):
         "action":  "ALLOW"
         })
     
-def ingest_location_mismatch(issuer_ip,issuer_country,mycountry):
-    ingest_logs(enrichment_fields={
-        "eventType": "SCAN_HOST",
-            "issuer_ip": f"{issuer_ip}",
-            "issuer_location": f"{issuer_country}",
-            "vehicle_location": f"{mycountry}",
-            "vin": f"{vin}",
-            "categories": ["DATA_AT_REST"],
-            "description": 'LOCATION_MISMATCH: An user issued a remote control command from a different location than the actual vehicle.',
-            "severity": "HIGH",
-            "alert_state": "ALERTING",
-            "action":  "BLOCK"
-        })
 
 def ingest_broker_connection_failed(vin, broker, port):
     ingest_logs(enrichment_fields={
@@ -116,7 +103,7 @@ def ingest_button_not_pressed_in_time(vin, topic):
             }) 
 
 def ingest_association_token_valid(vin, topic):
-    ingest_logs(enrichment_fields={
+    ingest_logs(enrichment_issuer_latitudefields={
             "eventType": "USER_RESOURCE_ACCESS",
             "vin": f"{vin}",
             "mqtt_topic": f"{topic}",
