@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  emqx_broker:
+    image: emqx/emqx:5.4.1
+    container_name: emqx_broker
+    ports:
+      - "1883:1883"
+      - "8083:8083"
+      - "8084:8084"
+      - "8883:8883"
+      - "18083:18083"
+    volumes:
+      - ./Broker/acl.conf:/opt/emqx/etc/acl.conf
+      - ./Broker/truststore/ca.pem:/opt/emqx/etc/certs/ca.pem
+      - ./Broker/keystore/emqx.key:/opt/emqx/etc/certs/emqx.key
+      - ./Broker/keystore/emqx.pem:/opt/emqx/etc/certs/emqx.pem
+      - ./Broker/emqx.conf:/opt/emqx/etc/emqx.conf
+      - emqx_broker_data:/opt/emqx/data
+      - emqx_broker_log:/opt/emqx/log
+
+  flask_app:
+    build:
+      context: ./Api
+    container_name: flask_app
+    ports:
+      - "2053:2053"
+    depends_on:
+      - emqx_broker
+    restart: on-failure
+
+volumes:
+  emqx_broker_data: {}
+  emqx_broker_log: {}

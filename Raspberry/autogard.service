@@ -1,0 +1,13 @@
+[Unit]
+Description="Receives vehicle commands from autoguard broker"
+After=network.target
+
+[Service]
+User=autoguard
+WorkingDirectory=/home/autoguard/autoguard/Raspberry/
+ExecStart=/bin/bash -c 'cd /home/autoguard/autoguard/Raspberry/ && source venv/bin/activate && python subscribe.py'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
