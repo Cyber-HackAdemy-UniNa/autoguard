@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'remote_control_car_widget.dart' show RemoteControlCarWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,8 +15,6 @@ class RemoteControlCarModel extends FlutterFlowModel<RemoteControlCarWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (setDoors)] action in remoteControlCar widget.
-  ApiCallResponse? apiResultp01;
   // Stores action output result for [Backend Call - API (setDoors)] action in openLeftDoor widget.
   ApiCallResponse? apiResultimv;
   // Stores action output result for [Backend Call - API (setDoors)] action in closeLeftDoor widget.

@@ -11,10 +11,10 @@ import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
 class EditProfileWidget extends StatefulWidget {
-  const EditProfileWidget({Key? key}) : super(key: key);
+  const EditProfileWidget({super.key});
 
   @override
-  _EditProfileWidgetState createState() => _EditProfileWidgetState();
+  State<EditProfileWidget> createState() => _EditProfileWidgetState();
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {

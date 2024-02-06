@@ -10,10 +10,10 @@ import 'account_settings_model.dart';
 export 'account_settings_model.dart';
 
 class AccountSettingsWidget extends StatefulWidget {
-  const AccountSettingsWidget({Key? key}) : super(key: key);
+  const AccountSettingsWidget({super.key});
 
   @override
-  _AccountSettingsWidgetState createState() => _AccountSettingsWidgetState();
+  State<AccountSettingsWidget> createState() => _AccountSettingsWidgetState();
 }
 
 class _AccountSettingsWidgetState extends State<AccountSettingsWidget> {

@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,12 +14,12 @@ export 'remote_control_car_model.dart';
 
 class RemoteControlCarWidget extends StatefulWidget {
   const RemoteControlCarWidget({
-    Key? key,
+    super.key,
     required this.model,
     required this.plateNumber,
     required this.imageLink,
     required this.id,
-  }) : super(key: key);
+  });
 
   final String? model;
   final String? plateNumber;
@@ -28,7 +27,7 @@ class RemoteControlCarWidget extends StatefulWidget {
   final String? id;
 
   @override
-  _RemoteControlCarWidgetState createState() => _RemoteControlCarWidgetState();
+  State<RemoteControlCarWidget> createState() => _RemoteControlCarWidgetState();
 }
 
 class _RemoteControlCarWidgetState extends State<RemoteControlCarWidget> {
@@ -40,14 +39,6 @@ class _RemoteControlCarWidgetState extends State<RemoteControlCarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RemoteControlCarModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.apiResultp01 = await SetDoorsCall.call(
-        side: 'left',
-        opened: 'false',
-      );
-    });
   }
 
   @override
@@ -86,7 +77,7 @@ class _RemoteControlCarWidgetState extends State<RemoteControlCarWidget> {
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () async {
-              context.pushNamed('HomePage');
+              context.safePop();
             },
             child: Icon(
               Icons.arrow_back_rounded,

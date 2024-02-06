@@ -13,10 +13,10 @@ import 'add_car_model.dart';
 export 'add_car_model.dart';
 
 class AddCarWidget extends StatefulWidget {
-  const AddCarWidget({Key? key}) : super(key: key);
+  const AddCarWidget({super.key});
 
   @override
-  _AddCarWidgetState createState() => _AddCarWidgetState();
+  State<AddCarWidget> createState() => _AddCarWidgetState();
 }
 
 class _AddCarWidgetState extends State<AddCarWidget> {

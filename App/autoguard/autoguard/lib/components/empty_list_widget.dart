@@ -9,10 +9,10 @@ import 'empty_list_model.dart';
 export 'empty_list_model.dart';
 
 class EmptyListWidget extends StatefulWidget {
-  const EmptyListWidget({Key? key}) : super(key: key);
+  const EmptyListWidget({super.key});
 
   @override
-  _EmptyListWidgetState createState() => _EmptyListWidgetState();
+  State<EmptyListWidget> createState() => _EmptyListWidgetState();
 }
 
 class _EmptyListWidgetState extends State<EmptyListWidget> {

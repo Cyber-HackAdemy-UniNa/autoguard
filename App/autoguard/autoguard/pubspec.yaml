@@ -30,6 +30,7 @@ dependencies:
   cloud_firestore: 4.13.1
   cloud_firestore_platform_interface: 6.0.5
   cloud_firestore_web: 3.8.5
+  collection: ^1.18.0
   equatable: 2.0.5
   file_picker: 6.1.1
   firebase_auth: 4.15.2

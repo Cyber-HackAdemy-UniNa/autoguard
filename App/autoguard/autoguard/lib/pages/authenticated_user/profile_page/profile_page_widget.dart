@@ -14,10 +14,10 @@ import 'profile_page_model.dart';
 export 'profile_page_model.dart';
 
 class ProfilePageWidget extends StatefulWidget {
-  const ProfilePageWidget({Key? key}) : super(key: key);
+  const ProfilePageWidget({super.key});
 
   @override
-  _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
+  State<ProfilePageWidget> createState() => _ProfilePageWidgetState();
 }
 
 class _ProfilePageWidgetState extends State<ProfilePageWidget>
