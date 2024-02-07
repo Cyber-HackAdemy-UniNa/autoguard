@@ -41,7 +41,7 @@ Coming soon..
 
 - Fabio Cinicolo
 - Umberto Micillo
-- Michele Milano
+- <a href="https://michelemilano.it/about/">Michele Milano</a>
 - Emanuele Pescara
 - Giuseppe Oliviero
 
