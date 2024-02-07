@@ -20,6 +20,7 @@ Our system primarily provides users with a mobile application and a web interfac
 ![PW1-Presentation](https://github.com/Cyber-HackAdemy-UniNa/autoguard/assets/75443422/665bad8b-c44a-493c-9e1b-c983826f9b7e)
 
 ### Mobile App
+Video demo: https://drive.google.com/file/d/1foSbeJyDS-IP1n5wsapugEBdawRYSotb/view?usp=sharing
 Coming soon..
 
 ### Vehicle Model
